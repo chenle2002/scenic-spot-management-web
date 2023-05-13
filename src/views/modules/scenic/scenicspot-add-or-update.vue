@@ -4,16 +4,16 @@
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-    <el-form-item label="" prop="scenicName">
+    <el-form-item label="景区名称" prop="scenicName">
       <el-input v-model="dataForm.scenicName" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="scenicDescription">
+    <el-form-item label="景区描述" prop="scenicDescription">
       <el-input v-model="dataForm.scenicDescription" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="scenicAddress">
+    <el-form-item label="景区地址" prop="scenicAddress">
       <el-input v-model="dataForm.scenicAddress" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="status">
+    <el-form-item label="开放状态（1为开放）" prop="status">
       <el-input v-model="dataForm.status" placeholder=""></el-input>
     </el-form-item>
     </el-form>

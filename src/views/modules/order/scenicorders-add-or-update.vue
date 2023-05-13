@@ -1,16 +1,21 @@
 <template>
   <el-dialog
-    :title="!dataForm.visitorId ? '新增' : '修改'"
+    :title="!dataForm.orderId ? '新增' : '修改'"
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-      <el-form-item label="游客姓名" prop="visitorname">
-        <el-input v-model="dataForm.visitorname" placeholder=""></el-input>
-      </el-form-item>
-    <el-form-item label="电话" prop="phone">
-      <el-input v-model="dataForm.phone" placeholder=""></el-input>
+    <el-form-item label="游客id" prop="visitorId">
+      <el-input v-model="dataForm.visitorId" placeholder=""></el-input>
     </el-form-item>
-
+    <el-form-item label="景区id" prop="scenicId">
+      <el-input v-model="dataForm.scenicId" placeholder=""></el-input>
+    </el-form-item>
+    <el-form-item label="订单描述" prop="description">
+      <el-input v-model="dataForm.description" placeholder=""></el-input>
+    </el-form-item>
+    <el-form-item label="价格" prop="price">
+      <el-input v-model="dataForm.price" placeholder=""></el-input>
+    </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -25,16 +30,24 @@
       return {
         visible: false,
         dataForm: {
-          visitorId: 0,
-          phone: '',
-          visitorname: '',
+          orderId: 0,
+          visitorId: '',
+          scenicId: '',
+          description: '',
+          price: '',
           createtime: ''
         },
         dataRule: {
-          phone: [
+          visitorId: [
             { required: true, message: '不能为空', trigger: 'blur' }
           ],
-          visitorname: [
+          scenicId: [
+            { required: true, message: '不能为空', trigger: 'blur' }
+          ],
+          description: [
+            { required: true, message: '不能为空', trigger: 'blur' }
+          ],
+          price: [
             { required: true, message: '不能为空', trigger: 'blur' }
           ],
           createtime: [
@@ -45,20 +58,22 @@
     },
     methods: {
       init (id) {
-        this.dataForm.visitorId = id || 0
+        this.dataForm.orderId = id || 0
         this.visible = true
         this.$nextTick(() => {
           this.$refs['dataForm'].resetFields()
-          if (this.dataForm.visitorId) {
+          if (this.dataForm.orderId) {
             this.$http({
-              url: this.$http.adornUrl(`/visitor/info/${this.dataForm.visitorId}`),
+              url: this.$http.adornUrl(`/scenicorders/info/${this.dataForm.orderId}`),
               method: 'get',
               params: this.$http.adornParams()
             }).then(({data}) => {
               if (data && data.code === 0) {
-                this.dataForm.phone = data.visitor.phone
-                this.dataForm.visitorname = data.visitor.visitorname
-                this.dataForm.createtime = data.visitor.createtime
+                this.dataForm.visitorId = data.scenicorders.visitorId
+                this.dataForm.scenicId = data.scenicorders.scenicId
+                this.dataForm.description = data.scenicorders.description
+                this.dataForm.price = data.scenicorders.price
+                this.dataForm.createtime = data.scenicorders.createtime
               }
             })
           }
@@ -69,12 +84,14 @@
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({
-              url: this.$http.adornUrl(`/visitor/${!this.dataForm.visitorId ? 'save' : 'update'}`),
+              url: this.$http.adornUrl(`/scenicorders/${!this.dataForm.orderId ? 'save' : 'update'}`),
               method: 'post',
               data: this.$http.adornData({
-                'visitorId': this.dataForm.visitorId || undefined,
-                'phone': this.dataForm.phone,
-                'visitorname': this.dataForm.visitorname,
+                'orderId': this.dataForm.orderId || undefined,
+                'visitorId': this.dataForm.visitorId,
+                'scenicId': this.dataForm.scenicId,
+                'description': this.dataForm.description,
+                'price': this.dataForm.price,
                 'createtime': this.dataForm.createtime
               })
             }).then(({data}) => {

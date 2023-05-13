@@ -4,20 +4,17 @@
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-    <el-form-item label="" prop="visitorId">
+    <el-form-item label="游客id" prop="visitorId">
       <el-input v-model="dataForm.visitorId" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="scenicId">
+    <el-form-item label="景区id" prop="scenicId">
       <el-input v-model="dataForm.scenicId" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="orderDescription">
+    <el-form-item label="订单简介" prop="orderDescription">
       <el-input v-model="dataForm.orderDescription" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="price">
+    <el-form-item label="价格" prop="price">
       <el-input v-model="dataForm.price" placeholder=""></el-input>
-    </el-form-item>
-    <el-form-item label="" prop="createtime">
-      <el-input v-model="dataForm.createtime" placeholder=""></el-input>
     </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">

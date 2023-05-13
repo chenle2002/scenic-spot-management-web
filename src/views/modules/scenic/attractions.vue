@@ -26,37 +26,37 @@
         prop="attractionsId"
         header-align="center"
         align="center"
-        label="">
+        label="景点id">
       </el-table-column>
       <el-table-column
         prop="scenicName"
         header-align="center"
         align="center"
-        label="">
+        label="景点名称">
       </el-table-column>
       <el-table-column
-        prop="scenicId"
+        prop="scenicSpotName"
         header-align="center"
         align="center"
-        label="">
+        label="所属景区">
       </el-table-column>
       <el-table-column
         prop="scenicDescription"
         header-align="center"
         align="center"
-        label="">
+        label="景点描述">
       </el-table-column>
       <el-table-column
         prop="peopleNumber"
         header-align="center"
         align="center"
-        label="">
+        label="最大承载人数">
       </el-table-column>
       <el-table-column
         prop="status"
         header-align="center"
         align="center"
-        label="">
+        label="开发状态（1为开放）">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -121,8 +121,9 @@
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.dataList = data.page.list
+            this.dataList = data.page
             this.totalPage = data.page.totalCount
+            console.log(this.dataList)
           } else {
             this.dataList = []
             this.totalPage = 0

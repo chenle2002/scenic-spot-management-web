@@ -26,29 +26,36 @@
         prop="orderId"
         header-align="center"
         align="center"
-        label="售票号">
+        label="售票订单号">
       </el-table-column>
       <el-table-column
-        prop="visitorId"
+        prop="visitorName"
         header-align="center"
         align="center"
-        label="游客id">
+        label="游客名称">
       </el-table-column>
       <el-table-column
-        prop="scenicId"
+        prop="visitorPhone"
         header-align="center"
         align="center"
-        label="景区id">
+        label="游客手机号">
       </el-table-column>
       <el-table-column
-        prop="orderDescription"
+        prop="scenicName"
         header-align="center"
         align="center"
-        label="订单简介">
+        label="景区名称">
+      </el-table-column>
+      <el-table-column
+        prop="description"
+        header-align="center"
+        align="center"
+        label="订单描述">
       </el-table-column>
       <el-table-column
         prop="price"
         header-align="center"
+        width="90"
         align="center"
         label="价格">
       </el-table-column>
@@ -85,7 +92,7 @@
 </template>
 
 <script>
-  import AddOrUpdate from './order-add-or-update'
+  import AddOrUpdate from './scenicorders-add-or-update'
   export default {
     data () {
       return {
@@ -112,7 +119,7 @@
       getDataList () {
         this.dataListLoading = true
         this.$http({
-          url: this.$http.adornUrl('/order/list'),
+          url: this.$http.adornUrl('/scenicorders/list'),
           method: 'get',
           params: this.$http.adornParams({
             'page': this.pageIndex,
@@ -121,7 +128,7 @@
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.dataList = data.page.list
+            this.dataList = data.page
             this.totalPage = data.page.totalCount
           } else {
             this.dataList = []
@@ -163,7 +170,7 @@
           type: 'warning'
         }).then(() => {
           this.$http({
-            url: this.$http.adornUrl('/order/delete'),
+            url: this.$http.adornUrl('/scenicorders/delete'),
             method: 'post',
             data: this.$http.adornData(ids, false)
           }).then(({data}) => {

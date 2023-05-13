@@ -26,25 +26,26 @@
         prop="visitorId"
         header-align="center"
         align="center"
-        label="">
-      </el-table-column>
-      <el-table-column
-        prop="phone"
-        header-align="center"
-        align="center"
-        label="">
+        label="游客id">
       </el-table-column>
       <el-table-column
         prop="visitorname"
         header-align="center"
         align="center"
-        label="">
+        label="游客姓名">
       </el-table-column>
+      <el-table-column
+        prop="phone"
+        header-align="center"
+        align="center"
+        label="电话">
+      </el-table-column>
+
       <el-table-column
         prop="createtime"
         header-align="center"
         align="center"
-        label="">
+        label="游客信息创建时间">
       </el-table-column>
       <el-table-column
         fixed="right"

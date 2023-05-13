@@ -26,31 +26,32 @@
         prop="scenicId"
         header-align="center"
         align="center"
-        label="">
+        label="景区id">
       </el-table-column>
       <el-table-column
         prop="scenicName"
         header-align="center"
         align="center"
-        label="">
+        label="景区名称">
       </el-table-column>
       <el-table-column
         prop="scenicDescription"
         header-align="center"
         align="center"
-        label="">
+        :show-overflow-tooltip="true"
+        label="景区描述">
       </el-table-column>
       <el-table-column
         prop="scenicAddress"
         header-align="center"
         align="center"
-        label="">
+        label="景区地址">
       </el-table-column>
       <el-table-column
         prop="status"
         header-align="center"
         align="center"
-        label="">
+        label="开放状态（1为开放）">
       </el-table-column>
       <el-table-column
         fixed="right"

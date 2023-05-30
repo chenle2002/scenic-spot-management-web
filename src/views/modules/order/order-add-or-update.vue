@@ -10,8 +10,8 @@
     <el-form-item label="景区id" prop="scenicId">
       <el-input v-model="dataForm.scenicId" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="订单简介" prop="orderDescription">
-      <el-input v-model="dataForm.orderDescription" placeholder=""></el-input>
+    <el-form-item label="订单简介" prop="description">
+      <el-input v-model="dataForm.description" placeholder=""></el-input>
     </el-form-item>
     <el-form-item label="价格" prop="price">
       <el-input v-model="dataForm.price" placeholder=""></el-input>
@@ -33,7 +33,7 @@
           orderId: 0,
           visitorId: '',
           scenicId: '',
-          orderDescription: '',
+          description: '',
           price: '',
           createtime: ''
         },
@@ -44,7 +44,7 @@
           scenicId: [
             { required: true, message: '不能为空', trigger: 'blur' }
           ],
-          orderDescription: [
+          description: [
             { required: true, message: '不能为空', trigger: 'blur' }
           ],
           price: [
@@ -64,16 +64,16 @@
           this.$refs['dataForm'].resetFields()
           if (this.dataForm.orderId) {
             this.$http({
-              url: this.$http.adornUrl(`//order/info/${this.dataForm.orderId}`),
+              url: this.$http.adornUrl(`/scenicorders/info/${this.dataForm.orderId}`),
               method: 'get',
               params: this.$http.adornParams()
             }).then(({data}) => {
               if (data && data.code === 0) {
-                this.dataForm.visitorId = data.order.visitorId
-                this.dataForm.scenicId = data.order.scenicId
-                this.dataForm.orderDescription = data.order.orderDescription
-                this.dataForm.price = data.order.price
-                this.dataForm.createtime = data.order.createtime
+                this.dataForm.visitorId = data.scenicorders.visitorId
+                this.dataForm.scenicId = data.scenicorders.scenicId
+                this.dataForm.description = data.scenicorders.description
+                this.dataForm.price = data.scenicorders.price
+                this.dataForm.createtime = data.scenicorders.createtime
               }
             })
           }
@@ -84,13 +84,13 @@
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({
-              url: this.$http.adornUrl(`//order/${!this.dataForm.orderId ? 'save' : 'update'}`),
+              url: this.$http.adornUrl(`/scenicorders/${!this.dataForm.orderId ? 'save' : 'update'}`),
               method: 'post',
               data: this.$http.adornData({
                 'orderId': this.dataForm.orderId || undefined,
                 'visitorId': this.dataForm.visitorId,
                 'scenicId': this.dataForm.scenicId,
-                'orderDescription': this.dataForm.orderDescription,
+                'description': this.dataForm.description,
                 'price': this.dataForm.price,
                 'createtime': this.dataForm.createtime
               })

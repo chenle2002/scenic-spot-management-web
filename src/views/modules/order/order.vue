@@ -29,19 +29,19 @@
         label="售票号">
       </el-table-column>
       <el-table-column
-        prop="visitorId"
+        prop="visitorName"
         header-align="center"
         align="center"
-        label="游客id">
+        label="游客名称">
       </el-table-column>
       <el-table-column
-        prop="scenicId"
+        prop="scenicName"
         header-align="center"
         align="center"
-        label="景区id">
+        label="景区名称">
       </el-table-column>
       <el-table-column
-        prop="orderDescription"
+        prop="description"
         header-align="center"
         align="center"
         label="订单简介">
@@ -112,7 +112,7 @@
       getDataList () {
         this.dataListLoading = true
         this.$http({
-          url: this.$http.adornUrl('/order/list'),
+          url: this.$http.adornUrl('/scenicorders/list'),
           method: 'get',
           params: this.$http.adornParams({
             'page': this.pageIndex,
@@ -121,7 +121,8 @@
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.dataList = data.page.list
+            console.log(data.page)
+            this.dataList = data.page
             this.totalPage = data.page.totalCount
           } else {
             this.dataList = []
@@ -163,7 +164,7 @@
           type: 'warning'
         }).then(() => {
           this.$http({
-            url: this.$http.adornUrl('/order/delete'),
+            url: this.$http.adornUrl('/scenicorders/delete'),
             method: 'post',
             data: this.$http.adornData(ids, false)
           }).then(({data}) => {
